@@ -1,0 +1,18 @@
+{
+  "name": "darya",
+  "version": "1.0.0",
+  "description": "game",
+  "main": "game.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack game.js dist/bundle.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "phaser-ce": "2.9.3"
+  },
+  "devDependencies": {
+    "webpack": "3.10.0"
+  }
+}

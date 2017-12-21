@@ -1,0 +1,11 @@
+body {
+    background-color: #eaeaea;
+}
+
+.container {
+    display: flex;
+}
+
+canvas {
+    margin: auto;
+}
