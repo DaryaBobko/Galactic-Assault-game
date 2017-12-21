@@ -34,10 +34,13 @@ let
     rightWASD = null,
     pause_label = null,
     bullet = null,
-    live = null;
+    live = null,
+    screenshotsLabel = null,
+    playerFirstLabel = null,
+    playerSecondLabel = null;
 
-let w = gameWidth;
-let h = gameHeight;
+// let w = gameWidth;
+// let h = gameHeight;
 
 var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game-space', {
     preload: preload,
@@ -78,12 +81,14 @@ function create() {
 function aboutGame(){
     aboutLabel.destroy();
   //  starfield = game.add.tileSprite(0, 0, 800, 600, 'starfield');
-    about = game.add.text(gameWidth - 370, 250, 'The goal of the game is to destroy \n the enemy and stay alive',{
+    about = game.add.bitmapText(gameWidth - 750, 20, 'gem', 'The goal of the game is to destroy \n the enemy and stay alive', 20 );
+    screenshotsLabel = game.add.text(gameWidth - 340, 210, 'Controls:', {
         font: '20px Arial',
-        fill: '#fff'
+        fill: '#427bb2'
     });
-  
-    aboutLabel = game.add.text(gameWidth - 750, 400, 'Screenshots:', {
+    playerFirstLabel = game.add.bitmapText(gameWidth - 340, 250, 'gem', ' PLAYER FIRST: \n  0 – fire \n Arrows – ship control', 20 );
+    playerSecondLabel = game.add.bitmapText(gameWidth - 340, 330, 'gem', ' PLAYER SECOND: \n  Spacebar – fire \n W, D, S, A – ship control', 20);
+    screenshotsLabel = game.add.text(gameWidth - 750, 400, 'Screenshots:', {
         font: '20px Arial',
         fill: '#427bb2'
     });
@@ -151,14 +156,14 @@ function goGame() {
     stateText.visible = false;
 
     for (let i = 0; i < 3; i++) {
-        let ship = livesPlayerFirst.create(game.world.width - 100 + (30 * i), 60, 'ship');
+        let ship = livesPlayerFirst.create(gameWidth - 100 + (30 * i), 60, 'ship');
         ship.anchor.setTo(0.5, 0.5);
         ship.angle = 0;
         ship.alpha = 0.4;
     }
 
     for (let i = 0; i < 3; i++) {
-        let ship2 = livesPlayerSecond.create(game.world.width - 100 + (30 * i), 570, 'ship');
+        let ship2 = livesPlayerSecond.create(gameWidth - 100 + (30 * i), 570, 'ship');
         ship2.anchor.setTo(0.5, 0.5);
         ship2.angle = 0;
         ship2.alpha = 0.4;
@@ -190,7 +195,7 @@ function forPause() {
     
     game.paused = true;
 
-    choiseLabel = game.add.text(w / 2, h - 300, 'Click outside to continue', {
+    choiseLabel = game.add.text(gameWidth / 2, gameHeight - 300, 'Click outside to continue', {
         font: '30px Arial',
         fill: '#fff'
     });
