@@ -1,4 +1,5 @@
 import {gameStatuses} from './enums'
+import {GameCore} from './game-core'
 
 let 
     playerFirst = null,
@@ -45,17 +46,10 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game-space', {
     render: render
 });
 
-function preload() {
+let gameCore = new GameCore(game);
 
-    game.load.image('bullet', 'img/bullet.png');
-    game.load.image('bullet2', 'img/bullet2.png');
-    game.load.image('ship', 'img/ship.png');
-    game.load.spritesheet('kaboom', 'img/explode.png', 128, 128);
-    game.load.image('starfield', 'img/canvas.jpg');
-    game.load.image('gameStart', 'img/GameStart.png');
-    game.load.image('hitting', 'img/Hitting.png');
-    game.load.image('victory', 'img/Victory.png');
-    game.load.bitmapFont('gem', 'fonts/bitmapFonts/gem.png', 'fonts/bitmapFonts/gem.xml');
+function preload() {
+    gameCore.preload();
 }
 
 
@@ -120,21 +114,8 @@ function goGame() {
     pause_label.inputEnabled = true;
     pause_label.events.onInputUp.add(forPause);
 
-    function createPlayerBullet(bulletName) {
-        let playerBullet = game.add.group();
-        playerBullet.enableBody = true;
-        playerBullet.physicsBodyType = Phaser.Physics.ARCADE;
-        playerBullet.createMultiple(30, bulletName);
-        playerBullet.setAll('anchor.x', 0.5);
-        playerBullet.setAll('anchor.y', 1);
-        playerBullet.setAll('outOfBoundsKill', true);
-        playerBullet.setAll('checkWorldBounds', true);
-
-        return playerBullet;
-    }
-
-    bulletsPlayerFirst = createPlayerBullet('bullet');
-    bulletsPlayerSecond = createPlayerBullet('bullet2');
+    bulletsPlayerFirst = gameCore.createPlayerBullet('bullet');
+    bulletsPlayerSecond = gameCore.createPlayerBullet('bullet2');
 
     function createPlayer(playerPositionY, playerAngle) {
         let player = game.add.sprite(400, playerPositionY, 'ship');
